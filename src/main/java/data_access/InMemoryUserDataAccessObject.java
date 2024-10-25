@@ -19,7 +19,6 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
         LogoutUserDataAccessInterface {
 
     private final Map<String, User> users = new HashMap<>();
-
     private String currentUsername;
 
     @Override
@@ -39,7 +38,6 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
 
     @Override
     public void changePassword(User user) {
-        // Replace the old entry with the new password
         users.put(user.getName(), user);
     }
 
@@ -51,5 +49,12 @@ public class InMemoryUserDataAccessObject implements SignupUserDataAccessInterfa
     @Override
     public String getCurrentUsername() {
         return this.currentUsername;
+    }
+
+    /**
+     * Spherical Function.
+     */
+    public void logout() {
+        this.currentUsername = null;
     }
 }
