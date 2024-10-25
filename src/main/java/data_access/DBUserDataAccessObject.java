@@ -1,8 +1,10 @@
 package data_access;
 
 import java.io.IOException;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import entity.User;
 import entity.UserFactory;
 import okhttp3.MediaType;
@@ -32,7 +34,7 @@ public class DBUserDataAccessObject implements SignupUserDataAccessInterface,
     private static final String MESSAGE = "message";
     private final UserFactory userFactory;
 
-    private String currentUsername; // Keep track of current logged-in user locally
+    private String currentUsername;
 
     public DBUserDataAccessObject(UserFactory userFactory) {
         this.userFactory = userFactory;
@@ -55,17 +57,19 @@ public class DBUserDataAccessObject implements SignupUserDataAccessInterface,
                 final String name = userJSONObject.getString(USERNAME);
                 final String password = userJSONObject.getString(PASSWORD);
                 return userFactory.create(name, password);
-            } else {
+            }
+            else {
                 throw new RuntimeException(responseBody.getString(MESSAGE));
             }
-        } catch (IOException | JSONException ex) {
+        }
+        catch (IOException | JSONException ex) {
             throw new RuntimeException(ex);
         }
     }
 
     @Override
     public void setCurrentUsername(String name) {
-        this.currentUsername = name; // Set the current logged-in user locally
+        this.currentUsername = name;
     }
 
     @Override
@@ -80,7 +84,8 @@ public class DBUserDataAccessObject implements SignupUserDataAccessInterface,
             final JSONObject responseBody = new JSONObject(response.body().string());
 
             return responseBody.getInt(STATUS_CODE_LABEL) == SUCCESS_CODE;
-        } catch (IOException | JSONException ex) {
+        }
+        catch (IOException | JSONException ex) {
             throw new RuntimeException(ex);
         }
     }
@@ -106,7 +111,8 @@ public class DBUserDataAccessObject implements SignupUserDataAccessInterface,
             if (responseBody.getInt(STATUS_CODE_LABEL) != SUCCESS_CODE) {
                 throw new RuntimeException(responseBody.getString(MESSAGE));
             }
-        } catch (IOException | JSONException ex) {
+        }
+        catch (IOException | JSONException ex) {
             throw new RuntimeException(ex);
         }
     }
@@ -132,7 +138,8 @@ public class DBUserDataAccessObject implements SignupUserDataAccessInterface,
             if (responseBody.getInt(STATUS_CODE_LABEL) != SUCCESS_CODE) {
                 throw new RuntimeException(responseBody.getString(MESSAGE));
             }
-        } catch (IOException | JSONException ex) {
+        }
+        catch (IOException | JSONException ex) {
             throw new RuntimeException(ex);
         }
     }

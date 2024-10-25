@@ -137,6 +137,9 @@ public class LoggedInView extends JPanel implements PropertyChangeListener {
         this.changePasswordController = changePasswordController;
     }
 
+    /**
+     * The View for when the user is logged into the program.
+     */
     public void setLogoutController(LogoutController logoutController) {
         // TODO: save the logout controller in the instance variable.
     }
